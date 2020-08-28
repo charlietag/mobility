@@ -147,7 +147,7 @@ describe Mobility::Plugins::Cache do
         let(:model_class) do
           stub_const 'Article', Class.new(ActiveRecord::Base)
           Article.include attributes
-          Article.include attributes_class.new("content", backend: backend_listener(content_listener), cache: true, active_record: true)
+          Article.include translations_class.new("content", backend: backend_listener(content_listener), cache: true, active_record: true)
           Article
         end
         it_behaves_like "cache that resets on model action with multiple backends", :reload
@@ -185,7 +185,7 @@ describe Mobility::Plugins::Cache do
           stub_const 'Article', Class.new(Sequel::Model)
           Article.dataset = DB[:articles]
           Article.include attributes
-          Article.include attributes_class.new("content", backend: backend_listener(content_listener), cache: true)
+          Article.include translations_class.new("content", backend: backend_listener(content_listener), cache: true)
           Article
         end
         it_behaves_like "cache that resets on model action with multiple backends", :refresh

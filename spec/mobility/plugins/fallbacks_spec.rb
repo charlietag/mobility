@@ -137,7 +137,7 @@ describe Mobility::Plugins::Fallbacks do
     end
 
     before do
-      attributes_class.class_eval do
+      translations_class.class_eval do
         private
 
         def generate_fallbacks(_)

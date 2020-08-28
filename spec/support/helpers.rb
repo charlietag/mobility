@@ -121,7 +121,7 @@ module Helpers
     def translates(klass, *attribute_names, **options)
       raise ArgumentError, "to use attributes you must call configure outside of it blocks" unless self.class.configured?
 
-      klass.include attributes_class.new(*attribute_names, **options)
+      klass.include translations_class.new(*attribute_names, **options)
       klass
     end
 
@@ -133,7 +133,7 @@ module Helpers
       def plugins(&block)
         @configured = true
 
-        let(:attributes_class) do
+        let(:translations_class) do
           Class.new(Mobility::Attributes).tap do |attrs|
             attrs.plugins(&block)
           end
@@ -144,7 +144,7 @@ module Helpers
         raise ArgumentError, "to use attributes you must call configure outside of it blocks" unless configured?
 
         let(:model_class) do
-          attributes = attributes_class.new(*attribute_names, **options)
+          attributes = translations_class.new(*attribute_names, **options)
           Class.new do
             include attributes
           end
@@ -198,7 +198,7 @@ module Helpers
         let(:instance) { model_class.new }
 
         let(:attributes) do
-          attributes_class.new(*attribute_names, backend: backend_class, **options)
+          translations_class.new(*attribute_names, backend: backend_class, **options)
         end
 
         let(:listener) { double(:backend) }

@@ -154,7 +154,7 @@ describe "Mobility::Plugins::ActiveRecord::Dirty", orm: :active_record do
     end
 
     it "tracks forced changes" do
-      model_class.include attributes_class.new("content", backend: backend_listener(double(:backend)), dirty: true)
+      model_class.include translations_class.new("content", backend: backend_listener(double(:backend)), dirty: true)
       instance = model_class.create(title: "foo")
 
       instance.title_will_change!
