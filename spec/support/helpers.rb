@@ -146,7 +146,7 @@ module Helpers
         let(:attribute_name) { attribute_name }
 
         let(:attributes_class) do
-          Class.new(TestAttributes).tap do |attrs|
+          Class.new(Mobility::Attributes).tap do |attrs|
             attrs.plugins(&block)
           end
         end
