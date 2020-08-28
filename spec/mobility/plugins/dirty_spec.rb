@@ -4,8 +4,10 @@ require "mobility/plugins/dirty"
 describe Mobility::Plugins::Dirty do
   include Helpers::Plugins
 
+  plugin_setup
+
   context "dirty default option" do
-    plugin_setup do
+    configure do
       dirty
     end
 
@@ -15,7 +17,7 @@ describe Mobility::Plugins::Dirty do
   end
 
   context "fallthrough accessors is falsey" do
-    plugin_setup do
+    configure do
       dirty true
       fallthrough_accessors false
     end

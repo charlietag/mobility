@@ -3,9 +3,10 @@ require "mobility/plugins/presence"
 
 describe Mobility::Plugins::Presence do
   include Helpers::Plugins
+  plugin_setup
 
   context "default option value" do
-    plugin_setup do
+    configure do
       presence
     end
 
@@ -79,7 +80,7 @@ describe Mobility::Plugins::Presence do
   end
 
   context "option = false" do
-    plugin_setup do
+    configure do
       presence false
     end
 

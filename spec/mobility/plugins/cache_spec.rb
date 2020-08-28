@@ -4,8 +4,10 @@ require "mobility/plugins/cache"
 describe Mobility::Plugins::Cache do
   include Helpers::Plugins
 
+  plugin_setup
+
   describe "backend methods" do
-    plugin_setup do
+    configure do
       cache
     end
 
@@ -100,7 +102,7 @@ describe Mobility::Plugins::Cache do
 
     context "ActiveRecord model", orm: :active_record do
       context "with one backend" do
-        plugin_setup do
+        configure do
           cache
           active_record
         end
@@ -135,7 +137,7 @@ describe Mobility::Plugins::Cache do
       end
 
       context "with multiple backends" do
-        plugin_setup "title" do
+        configure do
           cache
           active_record
         end
@@ -156,7 +158,7 @@ describe Mobility::Plugins::Cache do
 
     context "Sequel model", orm: :sequel do
       context "with one backend" do
-        plugin_setup "title" do
+        configure do
           cache
           sequel
         end
@@ -172,7 +174,7 @@ describe Mobility::Plugins::Cache do
       end
 
       context "with multiple backends" do
-        plugin_setup "title" do
+        configure do
           cache
           sequel
         end

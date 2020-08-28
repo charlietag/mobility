@@ -4,11 +4,14 @@ return unless defined?(ActiveRecord)
 
 describe "Mobility::Plugins::AttributeMethods", orm: :active_record do
   include Helpers::Plugins
-  plugin_setup do
+
+  configure do
     active_record
     attribute_methods true
     reader
   end
+
+  plugin_setup
 
   let(:untranslated_attributes) do
     {

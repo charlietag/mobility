@@ -4,8 +4,10 @@ require "mobility/plugins/fallthrough_accessors"
 describe Mobility::Plugins::FallthroughAccessors do
   include Helpers::Plugins
 
+  plugin_setup
+
   context "option value is default" do
-    plugin_setup do
+    configure do
       fallthrough_accessors
     end
 
@@ -49,7 +51,7 @@ describe Mobility::Plugins::FallthroughAccessors do
   end
 
   context "option value is false" do
-    plugin_setup do
+    configure do
       fallthrough_accessors false
     end
 

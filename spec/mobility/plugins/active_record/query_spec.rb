@@ -12,6 +12,8 @@ describe "Mobility::Plugins::ActiveRecord::Query", orm: :active_record do
   include Helpers::Plugins
   require "mobility/plugins/active_record/query"
 
+  plugin_setup
+
   describe "query scope" do
     let(:model_class) do
       stub_const 'Article', Class.new(ActiveRecord::Base)
@@ -20,7 +22,7 @@ describe "Mobility::Plugins::ActiveRecord::Query", orm: :active_record do
     end
 
     context "default query scope" do
-      plugin_setup do
+      configure do
         query
         active_record
       end
@@ -31,7 +33,7 @@ describe "Mobility::Plugins::ActiveRecord::Query", orm: :active_record do
     end
 
     context "custom query scope" do
-      plugin_setup do
+      configure do
         query :foo
         active_record
       end

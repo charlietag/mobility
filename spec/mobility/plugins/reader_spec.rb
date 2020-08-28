@@ -4,9 +4,11 @@ require "mobility/plugins/reader"
 describe Mobility::Plugins::Reader do
   include Helpers::Plugins
 
-  plugin_setup do
+  configure do
     reader
   end
+
+  plugin_setup
 
   describe "getters" do
     let(:instance) { model_class.new }

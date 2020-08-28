@@ -112,6 +112,48 @@ module Helpers
     end
   end
 
+  # Simple module for setting up translated attributes on a class
+  module Configure
+    def self.included(base)
+      base.extend ClassMethods
+    end
+
+    def translates(klass, *attribute_names, **options)
+      raise ArgumentError, "to use attributes you must call configure outside of it blocks" unless self.class.configured?
+
+      klass.include attributes_class.new(*attribute_names, **options)
+      klass
+    end
+
+    module ClassMethods
+      def configured?
+        !!@configured
+      end
+
+      def configure(&block)
+        @configured = true
+
+        let(:attributes_class) do
+          Class.new(Mobility::Attributes).tap do |attrs|
+            attrs.plugins(&block)
+          end
+        end
+      end
+
+      def translates(*attribute_names, **options)
+        raise ArgumentError, "to use attributes you must call configure outside of it blocks" unless configured?
+
+        let(:model_class) do
+          attributes = attributes_class.new(*attribute_names, **options)
+          Class.new do
+            include attributes
+          end
+        end
+        let(:instance) { model_class.new }
+      end
+    end
+  end
+
   module Plugins
     include Backend
 
@@ -120,6 +162,8 @@ module Helpers
     end
 
     module ClassMethods
+      include Helpers::Configure::ClassMethods
+
       # Define new plugin, register it, then remove after spec is done
       def define_plugins(*names)
         names.each do |name|
@@ -138,18 +182,12 @@ module Helpers
         end
       end
       alias_method :define_plugin, :define_plugins
+
       # Sets up attributes module with a listener to listen on reads/writes to the
       # backend.
-      # Pass block to define plugins in block.
-      def plugin_setup(attribute_name = "title", *other_names, **options, &block)
+      def plugin_setup(attribute_name = "title", *other_names, **options)
         attribute_names = [attribute_name, *other_names]
         let(:attribute_name) { attribute_name }
-
-        let(:attributes_class) do
-          Class.new(Mobility::Attributes).tap do |attrs|
-            attrs.plugins(&block)
-          end
-        end
 
         let(:model_class) do
           Class.new.tap do |klass|
@@ -167,33 +205,6 @@ module Helpers
         let(:backend_class) { backend_listener(listener) }
         let(:backend) { instance.mobility_backends[attribute_name] }
         attribute_names.each { |name| let(:"#{name}_backend") { instance.send("#{name}_backend") } }
-      end
-    end
-  end
-
-  module Translates
-    def self.included(base)
-      base.extend ClassMethods
-    end
-
-    def translates(klass, *attribute_names, **options)
-      raise ArgumentError, "to use attributes you must call configure outside of it blocks" unless self.class.configured?
-
-      klass.include attributes_class.new(*attribute_names, **options)
-    end
-
-    module ClassMethods
-      def configured?
-        !!@configured
-      end
-
-      def configure(&block)
-        @configured = true
-
-        attributes_class = Class.new(Mobility::Attributes).tap do |attrs|
-          attrs.plugins(&block)
-        end
-        let(:attributes_class) { attributes_class }
       end
     end
   end

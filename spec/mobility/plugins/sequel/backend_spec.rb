@@ -7,9 +7,11 @@ describe "Mobility::Plugins::Sequel::Backend", orm: :sequel do
 
   include Helpers::Plugins
 
-  plugin_setup do
+  configure do
     sequel_backend
   end
+
+  plugin_setup
 
   describe "#load_backend" do
     context "backend with name exists in Sequel namespace" do

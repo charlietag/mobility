@@ -4,8 +4,10 @@ require "mobility/plugins/fallbacks"
 describe Mobility::Plugins::Fallbacks do
   include Helpers::Plugins
 
+  plugin_setup
+
   context "fallbacks is a hash" do
-    plugin_setup do
+    configure do
       fallbacks({ :'en-US' => 'de-DE', :pt => 'de-DE' })
     end
 
@@ -76,7 +78,7 @@ describe Mobility::Plugins::Fallbacks do
 
   if ENV['FEATURE'] == 'i18n_fallbacks'
     context "fallbacks is true" do
-      plugin_setup do
+      configure do
         fallbacks true
       end
 
@@ -94,7 +96,7 @@ describe Mobility::Plugins::Fallbacks do
   end
 
   context "fallbacks is default" do
-    plugin_setup do
+    configure do
       fallbacks
     end
 
@@ -130,7 +132,7 @@ describe Mobility::Plugins::Fallbacks do
   # configuration, but it is still possible by overriding a private method on
   # the Attributes class.
   describe "overriding fallbacks generator" do
-    plugin_setup do
+    configure do
       fallbacks true
     end
 

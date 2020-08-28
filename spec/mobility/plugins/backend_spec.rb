@@ -4,7 +4,9 @@ require "mobility/plugins/writer"
 describe Mobility::Plugins::Backend do
   include Helpers::Plugins
 
-  plugin_setup do
+  plugin_setup
+
+  configure do
     backend
   end
 
@@ -189,7 +191,7 @@ describe Mobility::Plugins::Backend do
     after { Mobility::Backends.instance_variable_get(:@backends).delete(:foo) }
 
     describe "default without backend options" do
-      plugin_setup do
+      configure do
         backend :foo
       end
 
@@ -204,7 +206,7 @@ describe Mobility::Plugins::Backend do
     end
 
     describe "default with backend options" do
-      plugin_setup do
+      configure do
         backend :foo, association_name: :bar
       end
 

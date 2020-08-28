@@ -4,8 +4,10 @@ require "mobility/plugins/default"
 describe Mobility::Plugins::Default do
   include Helpers::Plugins
 
+  plugin_setup
+
   context "option = 'foo'" do
-    plugin_setup do
+    configure do
       default 'default foo'
     end
 
@@ -43,7 +45,7 @@ describe Mobility::Plugins::Default do
   end
 
   context "default is a Proc" do
-    plugin_setup do
+    configure do
       default Proc.new { |attribute, locale, options| "#{attribute} in #{locale} with #{options[:this]}" }
     end
 
