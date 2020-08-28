@@ -31,7 +31,6 @@ Mobility.configure do |config|
     cache
     dirty
     fallbacks
-    fallthrough_accessors
     locale_accessors
   end
   config.plugin orm if orm
