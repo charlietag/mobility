@@ -5,7 +5,7 @@ return unless defined?(ActiveRecord)
 describe "Mobility::Plugins::AttributeMethods", orm: :active_record do
   include Helpers::Plugins
 
-  configure do
+  plugins do
     active_record
     attribute_methods true
     reader

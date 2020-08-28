@@ -7,7 +7,7 @@ describe Mobility::Plugins::LocaleAccessors do
   plugin_setup
 
   context "with option = [locales]" do
-    configure do
+    plugins do
       locale_accessors [:cz, :de, :'pt-BR']
       reader
       writer
@@ -39,7 +39,7 @@ describe Mobility::Plugins::LocaleAccessors do
   end
 
   context "with default option" do
-    configure do
+    plugins do
       locale_accessors
     end
 
@@ -92,7 +92,7 @@ describe Mobility::Plugins::LocaleAccessors do
   end
 
   context "with falsey option" do
-    configure do
+    plugins do
       locale_accessors false
     end
 

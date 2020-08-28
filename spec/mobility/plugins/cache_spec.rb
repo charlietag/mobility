@@ -7,7 +7,7 @@ describe Mobility::Plugins::Cache do
   plugin_setup
 
   describe "backend methods" do
-    configure do
+    plugins do
       cache
     end
 
@@ -102,7 +102,7 @@ describe Mobility::Plugins::Cache do
 
     context "ActiveRecord model", orm: :active_record do
       context "with one backend" do
-        configure do
+        plugins do
           cache
           active_record
         end
@@ -137,7 +137,7 @@ describe Mobility::Plugins::Cache do
       end
 
       context "with multiple backends" do
-        configure do
+        plugins do
           cache
           active_record
         end
@@ -158,7 +158,7 @@ describe Mobility::Plugins::Cache do
 
     context "Sequel model", orm: :sequel do
       context "with one backend" do
-        configure do
+        plugins do
           cache
           sequel
         end
@@ -174,7 +174,7 @@ describe Mobility::Plugins::Cache do
       end
 
       context "with multiple backends" do
-        configure do
+        plugins do
           cache
           sequel
         end

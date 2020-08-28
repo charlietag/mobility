@@ -7,10 +7,11 @@ describe "Mobility::Plugins::ActiveRecord::Backend", orm: :active_record do
 
   include Helpers::Plugins
 
-  configure do
+  plugin_setup
+
+  plugins do
     active_record_backend
   end
-  plugin_setup
 
   describe "#load_backend" do
     context "backend with name exists in ActiveRecord namespace" do

@@ -5,7 +5,7 @@ return unless defined?(ActiveRecord)
 describe "Mobility::Plugins::ActiveRecord", orm: :active_record do
   include Helpers::Configure
 
-  configure do
+  plugins do
     active_record
   end
 

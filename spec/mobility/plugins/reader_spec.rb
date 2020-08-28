@@ -4,7 +4,7 @@ require "mobility/plugins/reader"
 describe Mobility::Plugins::Reader do
   include Helpers::Plugins
 
-  configure do
+  plugins do
     reader
   end
 

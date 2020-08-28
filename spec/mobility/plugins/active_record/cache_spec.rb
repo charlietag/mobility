@@ -3,7 +3,7 @@ require "spec_helper"
 describe "Mobility::Plugins::ActiveRecord::Cache", orm: :active_record do
   include Helpers::Plugins
 
-  configure do
+  plugins do
     active_record
     cache
   end

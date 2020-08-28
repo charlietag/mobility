@@ -3,7 +3,7 @@ require "spec_helper"
 describe "Mobility::Plugins::Sequel", orm: :sequel do
   include Helpers::Configure
 
-  configure do
+  plugins do
     sequel
   end
 

@@ -5,7 +5,7 @@ return unless defined?(ActiveRecord)
 describe "Mobility::Plugins::ActiveRecord::Dirty", orm: :active_record do
   include Helpers::Plugins
 
-  configure do
+  plugins do
     dirty true
     active_record
     reader

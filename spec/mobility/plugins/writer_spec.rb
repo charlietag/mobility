@@ -4,7 +4,7 @@ require "mobility/plugins/writer"
 describe Mobility::Plugins::Writer do
   include Helpers::Plugins
 
-  configure do
+  plugins do
     writer
   end
 

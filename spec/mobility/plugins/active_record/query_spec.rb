@@ -22,7 +22,7 @@ describe "Mobility::Plugins::ActiveRecord::Query", orm: :active_record do
     end
 
     context "default query scope" do
-      configure do
+      plugins do
         query
         active_record
       end
@@ -33,7 +33,7 @@ describe "Mobility::Plugins::ActiveRecord::Query", orm: :active_record do
     end
 
     context "custom query scope" do
-      configure do
+      plugins do
         query :foo
         active_record
       end

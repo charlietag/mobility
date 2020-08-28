@@ -3,7 +3,7 @@ require "spec_helper"
 describe "Mobility::Plugins::Sequel::Cache", orm: :sequel do
   include Helpers::Plugins
 
-  configure do
+  plugins do
     sequel
     cache
   end

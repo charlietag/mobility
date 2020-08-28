@@ -7,7 +7,7 @@ describe "Mobility::Plugins::Sequel::Backend", orm: :sequel do
 
   include Helpers::Plugins
 
-  configure do
+  plugins do
     sequel_backend
   end
 

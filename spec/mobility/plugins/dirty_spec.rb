@@ -7,7 +7,7 @@ describe Mobility::Plugins::Dirty do
   plugin_setup
 
   context "dirty default option" do
-    configure do
+    plugins do
       dirty
     end
 
@@ -17,7 +17,7 @@ describe Mobility::Plugins::Dirty do
   end
 
   context "fallthrough accessors is falsey" do
-    configure do
+    plugins do
       dirty true
       fallthrough_accessors false
     end

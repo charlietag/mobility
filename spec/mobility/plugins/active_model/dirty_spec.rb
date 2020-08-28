@@ -7,7 +7,7 @@ describe "Mobility::Plugins::ActiveModel::Dirty", orm: :active_record do
 
   include Helpers::Plugins
 
-  configure do
+  plugins do
     active_model
     dirty true
     reader
@@ -351,7 +351,7 @@ describe "Mobility::Plugins::ActiveModel::Dirty", orm: :active_record do
   end
 
   describe "fallbacks compatiblity" do
-    configure do
+    plugins do
       active_model
       dirty true
       fallbacks({ en: 'ja' })

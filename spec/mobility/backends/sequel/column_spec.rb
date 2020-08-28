@@ -68,7 +68,7 @@ describe "Mobility::Backends::Sequel::Column", orm: :sequel do
 
     describe "with locale accessors" do
       include Helpers::Configure
-      configure do
+      plugins do
         sequel
         reader
         writer

@@ -73,7 +73,7 @@ describe "Mobility::Backends::ActiveRecord::Column", orm: :active_record do
 
     describe "with locale accessors" do
       include Helpers::Configure
-      configure do
+      plugins do
         active_record
         reader
         writer

@@ -7,7 +7,7 @@ describe Mobility::Plugins::FallthroughAccessors do
   plugin_setup
 
   context "option value is default" do
-    configure do
+    plugins do
       fallthrough_accessors
     end
 
@@ -51,7 +51,7 @@ describe Mobility::Plugins::FallthroughAccessors do
   end
 
   context "option value is false" do
-    configure do
+    plugins do
       fallthrough_accessors false
     end
 

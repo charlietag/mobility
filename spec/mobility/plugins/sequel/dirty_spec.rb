@@ -5,7 +5,7 @@ return unless defined?(Sequel)
 describe "Mobility::Plugins::Sequel::Dirty", orm: :sequel do
   include Helpers::Plugins
 
-  configure do
+  plugins do
     dirty true
     sequel
     reader

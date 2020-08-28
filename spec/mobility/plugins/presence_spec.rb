@@ -6,7 +6,7 @@ describe Mobility::Plugins::Presence do
   plugin_setup
 
   context "default option value" do
-    configure do
+    plugins do
       presence
     end
 
@@ -80,7 +80,7 @@ describe Mobility::Plugins::Presence do
   end
 
   context "option = false" do
-    configure do
+    plugins do
       presence false
     end
 

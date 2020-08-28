@@ -130,7 +130,7 @@ module Helpers
         !!@configured
       end
 
-      def configure(&block)
+      def plugins(&block)
         @configured = true
 
         let(:attributes_class) do

@@ -6,7 +6,7 @@ describe Mobility::Plugins::BackendReader do
   include Helpers::Backend
 
   context "with default format string" do
-    configure do
+    plugins do
       backend_reader
       backend :null
     end
@@ -19,7 +19,7 @@ describe Mobility::Plugins::BackendReader do
   end
 
   context "with custom format string" do
-    configure do
+    plugins do
       backend_reader "%s_translations"
       backend :null
     end
@@ -33,7 +33,7 @@ describe Mobility::Plugins::BackendReader do
   end
 
   context "with true as format string" do
-    configure do
+    plugins do
       backend_reader true
       backend :null
     end
@@ -46,7 +46,7 @@ describe Mobility::Plugins::BackendReader do
   end
 
   context "with falsey format string" do
-    configure do
+    plugins do
       backend_reader false
       backend :null
     end
