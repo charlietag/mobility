@@ -31,7 +31,6 @@ Mobility.configure do |config|
     cache
     dirty
     fallbacks
-    default
     fallthrough_accessors
     locale_accessors
   end
