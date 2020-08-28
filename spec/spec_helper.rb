@@ -24,7 +24,6 @@ require "mobility/backends/null"
 # Enable default plugins
 Mobility.configure do |config|
   config.plugins do
-    backend
     reader
     writer
     query
