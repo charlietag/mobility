@@ -20,7 +20,7 @@ describe "Mobility::Backends::Sequel::Container", orm: :sequel, db: :postgres do
   context "with standard plugins applied" do
     let(:backend) { post.mobility_backends[:title] }
 
-    before { ContainerPost.translates :title, :content, backend: :container, presence: false, cache: false, dirty: false }
+    before { ContainerPost.translates :title, :content, backend: :container, cache: false, dirty: false }
     let(:post) { ContainerPost.new }
 
     include_accessor_examples 'ContainerPost'
@@ -82,7 +82,7 @@ describe "Mobility::Backends::Sequel::Container", orm: :sequel, db: :postgres do
       stub_const 'JsonContainerPost', Class.new(Sequel::Model)
       JsonContainerPost.dataset = DB[:json_container_posts]
       JsonContainerPost.extend Mobility
-      JsonContainerPost.translates :title, :content, backend: :container, presence: false, cache: false, dirty: false, column_name: :json_translations
+      JsonContainerPost.translates :title, :content, backend: :container, cache: false, dirty: false, column_name: :json_translations
     end
     after(:all) { DB.drop_table?(:json_container_posts) }
 

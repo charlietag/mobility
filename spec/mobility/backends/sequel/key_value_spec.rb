@@ -277,7 +277,7 @@ describe "Mobility::Backends::Sequel::KeyValue", orm: :sequel do
           expect(article.send(title_backend.association_name).count).to eq(1)
           article.title = ""
           article.save
-          expect(article.title).to be_nil
+          expect(article.title).to eq("")
           expect(translation_class.count).to eq(1)
         end
       end
@@ -289,7 +289,7 @@ describe "Mobility::Backends::Sequel::KeyValue", orm: :sequel do
           expect { article.valid? }.not_to change(translation_class, :count)
           expect { article.save }.to change(translation_class, :count).by(-1)
 
-          expect(article.title).to eq(nil)
+          expect(article.title).to eq("")
         end
       end
 
