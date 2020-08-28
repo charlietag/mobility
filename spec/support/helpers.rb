@@ -170,4 +170,31 @@ module Helpers
       end
     end
   end
+
+  module Translates
+    def self.included(base)
+      base.extend ClassMethods
+    end
+
+    def translates(klass, *attribute_names, **options)
+      raise ArgumentError, "to use attributes you must call configure outside of it blocks" unless self.class.configured?
+
+      klass.include attributes_class.new(*attribute_names, **options)
+    end
+
+    module ClassMethods
+      def configured?
+        !!@configured
+      end
+
+      def configure(&block)
+        @configured = true
+
+        attributes_class = Class.new(Mobility::Attributes).tap do |attrs|
+          attrs.plugins(&block)
+        end
+        let(:attributes_class) { attributes_class }
+      end
+    end
+  end
 end
