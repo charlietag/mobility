@@ -67,8 +67,19 @@ describe "Mobility::Backends::Sequel::Column", orm: :sequel do
     end
 
     describe "with locale accessors" do
+      include Helpers::Configure
+      configure do
+        sequel
+        reader
+        writer
+        query
+        dirty
+        fallbacks
+        locale_accessors
+      end
+
       it "still works as usual" do
-        Comment.translates *attributes, backend: :column, cache: false, locale_accessors: true
+        translates Comment, *attributes, backend: :column, locale_accessors: true
         backend.write(:en, "Crappy post!")
         expect(comment.content_en).to eq("Crappy post!")
       end
