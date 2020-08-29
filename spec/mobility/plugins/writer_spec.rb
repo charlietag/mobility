@@ -46,7 +46,7 @@ describe Mobility::Plugins::Writer do
             "set title to #{title}"
           end
         end
-        klass.include attributes, mod
+        klass.include translations, mod
         klass
       end
     end

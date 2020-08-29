@@ -144,9 +144,9 @@ module Helpers
         raise ArgumentError, "to use attributes you must call configure outside of it blocks" unless configured?
 
         let(:model_class) do
-          attributes = translations_class.new(*attribute_names, **options)
+          translations = translations_class.new(*attribute_names, **options)
           Class.new do
-            include attributes
+            include translations
           end
         end
         let(:instance) { model_class.new }
@@ -191,13 +191,13 @@ module Helpers
 
         let(:model_class) do
           Class.new.tap do |klass|
-            klass.include attributes
+            klass.include translations
           end
         end unless method_defined?(:model_class)
 
         let(:instance) { model_class.new }
 
-        let(:attributes) do
+        let(:translations) do
           translations_class.new(*attribute_names, backend: backend_class, **options)
         end
 

@@ -17,19 +17,19 @@ describe Mobility::Plugins::Backend do
   describe "#included" do
     it "calls build_subclass on backend class with options merged with default options" do
       expect(backend_class).to receive(:build_subclass).with(model_class, hash_including(foo: "bar")).and_return(Class.new(backend_class))
-      attributes = translations_class.new("title", backend: backend_class, foo: "bar")
-      model_class.include attributes
+      translations = translations_class.new("title", backend: backend_class, foo: "bar")
+      model_class.include translations
     end
 
     it "assigns options to backend class" do
-      attributes = translations_class.new("title", backend: backend_class, foo: "bar")
-      model_class.include attributes
-      expect(attributes.backend_class.options).to eq(backend: backend_class, foo: "bar")
+      translations = translations_class.new("title", backend: backend_class, foo: "bar")
+      model_class.include translations
+      expect(translations.backend_class.options).to eq(backend: backend_class, foo: "bar")
     end
 
     it "freezes backend options after inclusion into model class" do
-      attributes = translations_class.new("title", backend: backend_class)
-      model_class.include attributes
+      translations = translations_class.new("title", backend: backend_class)
+      model_class.include translations
       expect(backend_class.options).to be_frozen
     end
 
@@ -171,15 +171,15 @@ describe Mobility::Plugins::Backend do
 
   describe "#backend_name" do
     it "returns backend name" do
-      attributes = translations_class.new("title", "content", backend: :null)
-      expect(attributes.backend_name).to eq(:null)
+      translations = translations_class.new("title", "content", backend: :null)
+      expect(translations.backend_name).to eq(:null)
     end
   end
 
   describe "#inspect" do
     it "includes backend name and attribute names" do
-      attributes = translations_class.new("title", "content", backend: :null)
-      expect(attributes.inspect).to eq("#<Attributes (null) @names=title, content>")
+      translations = translations_class.new("title", "content", backend: :null)
+      expect(translations.inspect).to eq("#<Attributes (null) @names=title, content>")
     end
   end
 
@@ -215,34 +215,34 @@ describe Mobility::Plugins::Backend do
       end
 
       it "passes backend options to backend" do
-        attributes = translations_class.new("title")
+        translations = translations_class.new("title")
         expect(FooBackend).to receive(:configure).with(hash_including(association_name: :bar))
-        model_class.include(attributes)
+        model_class.include(translations)
       end
 
       it "passes module options if backend_options passed explicitly to initializer" do
-        attributes = translations_class.new("title", backend: [:foo, { association_name: :baz }])
+        translations = translations_class.new("title", backend: [:foo, { association_name: :baz }])
         expect(FooBackend).to receive(:configure).with(hash_including(association_name: :baz))
-        model_class.include(attributes)
+        model_class.include(translations)
       end
 
       it "passes module options if backend options passed implicitly to initializer" do
-        attributes = translations_class.new("title", backend: :foo, association_name: :baz)
+        translations = translations_class.new("title", backend: :foo, association_name: :baz)
         expect(FooBackend).to receive(:configure).with(hash_including(association_name: :baz))
-        model_class.include(attributes)
+        model_class.include(translations)
       end
 
       it "overrides backend option from options passed to initializer even when backend: key is missing" do
-        attributes = translations_class.new("title", association_name: :baz)
+        translations = translations_class.new("title", association_name: :baz)
         expect(FooBackend).to receive(:configure).with(hash_including(association_name: :baz))
-        model_class.include(attributes)
+        model_class.include(translations)
       end
 
       it "does not override original backend options hash" do
         backend_options = { association_name: :foo }
         expect {
-          attributes = translations_class.new("title", backend: [:foo, backend_options])
-          model_class.include(attributes)
+          translations = translations_class.new("title", backend: [:foo, backend_options])
+          model_class.include(translations)
         }.not_to change { backend_options }
       end
     end

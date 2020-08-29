@@ -24,8 +24,7 @@ describe Mobility::Plugins::FallthroughAccessors do
       end
 
       model_class = Class.new
-      model_class.include mod
-      model_class.include attributes
+      model_class.include translations, mod
 
       instance = model_class.new
 
@@ -41,8 +40,7 @@ describe Mobility::Plugins::FallthroughAccessors do
       end
 
       model_class = Class.new
-      model_class.include mod
-      model_class.include attributes
+      model_class.include translations, mod
 
       instance = model_class.new
 

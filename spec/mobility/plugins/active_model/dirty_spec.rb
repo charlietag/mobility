@@ -21,8 +21,8 @@ describe "Mobility::Plugins::ActiveModel::Dirty", orm: :active_record do
     am_class = Class.new
     am_class.include ::ActiveModel::Dirty
 
-    expect { klass.include attributes }.to raise_error(TypeError, /should include ActiveModel\:\:Dirty/)
-    expect { am_class.include attributes }.not_to raise_error
+    expect { klass.include translations }.to raise_error(TypeError, /should include ActiveModel\:\:Dirty/)
+    expect { am_class.include translations }.not_to raise_error
   end
 
   def define_backend_class
@@ -61,7 +61,7 @@ describe "Mobility::Plugins::ActiveModel::Dirty", orm: :active_record do
       def save
         changes_applied
       end
-    }.tap { |klass| klass.include attributes }
+    }.tap { |klass| klass.include translations }
   end
   let(:backend_class) { define_backend_class }
 
@@ -362,7 +362,7 @@ describe "Mobility::Plugins::ActiveModel::Dirty", orm: :active_record do
     let(:model_class) do
       stub_const 'ArticleWithFallbacks', Class.new
       ArticleWithFallbacks.include ActiveModel::Dirty
-      ArticleWithFallbacks.include attributes
+      ArticleWithFallbacks.include translations
       ArticleWithFallbacks
     end
 

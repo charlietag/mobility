@@ -16,7 +16,7 @@ describe "Mobility::Plugins::ActiveRecord::Dirty", orm: :active_record do
 
   let(:model_class) do
     stub_const 'Article', Class.new(ActiveRecord::Base)
-    Article.include attributes
+    Article.include translations
 
     # ensure we include these methods as a module rather than override in class
     changes_applied_method = ::ActiveRecord::VERSION::STRING < '5.1' ? :changes_applied : :changes_internally_applied

@@ -24,7 +24,7 @@ describe "Mobility::Plugins::AttributeMethods", orm: :active_record do
   end
   let(:model_class) do
     stub_const 'Article', Class.new(ActiveRecord::Base)
-    Article.include(attributes)
+    Article.include(translations)
     Article
   end
 

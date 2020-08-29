@@ -12,7 +12,7 @@ describe Mobility::Plugins::Dirty do
     end
 
     it "requires fallthrough_accessors" do
-      expect(attributes).to have_plugin(:fallthrough_accessors)
+      expect(translations).to have_plugin(:fallthrough_accessors)
     end
   end
 

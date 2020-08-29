@@ -61,7 +61,7 @@ describe Mobility::Plugins::Reader do
             "title?"
           end
         end
-        klass.include attributes, mod
+        klass.include translations, mod
         klass
       end
     end

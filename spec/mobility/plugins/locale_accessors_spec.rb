@@ -69,8 +69,7 @@ describe Mobility::Plugins::LocaleAccessors do
               spy_.title_en = value
             end
           end
-          klass.include mod
-          klass.include attributes
+          klass.include translations, mod
         end
       end
 

@@ -109,7 +109,7 @@ describe Mobility::Plugins::Cache do
 
         let(:model_class) do
           stub_const 'Article', Class.new(ActiveRecord::Base)
-          Article.include attributes
+          Article.include translations
         end
         let(:instance) { model_class.create }
 
@@ -146,7 +146,7 @@ describe Mobility::Plugins::Cache do
         let(:content_listener) { double(:backend) }
         let(:model_class) do
           stub_const 'Article', Class.new(ActiveRecord::Base)
-          Article.include attributes
+          Article.include translations
           Article.include translations_class.new("content", backend: backend_listener(content_listener), cache: true, active_record: true)
           Article
         end
@@ -166,7 +166,7 @@ describe Mobility::Plugins::Cache do
         let(:model_class) do
           stub_const 'Article', Class.new(Sequel::Model)
           Article.dataset = DB[:articles]
-          Article.include attributes
+          Article.include translations
           Article
         end
 
@@ -184,7 +184,7 @@ describe Mobility::Plugins::Cache do
         let(:model_class) do
           stub_const 'Article', Class.new(Sequel::Model)
           Article.dataset = DB[:articles]
-          Article.include attributes
+          Article.include translations
           Article.include translations_class.new("content", backend: backend_listener(content_listener), cache: true)
           Article
         end

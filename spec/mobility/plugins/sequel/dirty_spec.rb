@@ -17,7 +17,7 @@ describe "Mobility::Plugins::Sequel::Dirty", orm: :sequel do
   let(:model_class) do
     stub_const 'Article', Class.new(Sequel::Model)
     Article.dataset = DB[:articles]
-    Article.include attributes
+    Article.include translations
     Article
   end
 

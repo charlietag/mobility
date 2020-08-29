@@ -17,7 +17,7 @@ describe "Mobility::Plugins::ActiveRecord::Query", orm: :active_record do
   describe "query scope" do
     let(:model_class) do
       stub_const 'Article', Class.new(ActiveRecord::Base)
-      Article.include attributes
+      Article.include translations
       Article
     end
 
