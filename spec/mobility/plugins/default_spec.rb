@@ -4,7 +4,7 @@ require "mobility/plugins/default"
 describe Mobility::Plugins::Default do
   include Helpers::Plugins
 
-  plugin_setup
+  plugin_setup :title
 
   context "option = 'foo'" do
     plugins do

@@ -8,7 +8,7 @@ describe Mobility::Plugins::Reader do
     reader
   end
 
-  plugin_setup
+  plugin_setup :title
 
   describe "getters" do
     let(:instance) { model_class.new }

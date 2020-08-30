@@ -14,7 +14,7 @@ describe "Mobility::Plugins::ActiveModel::Dirty", orm: :active_record do
     writer
   end
 
-  plugin_setup
+  plugin_setup :title
 
   it "raises TypeError unless class is a subclass of ActiveModel::Dirty" do
     klass = Class.new

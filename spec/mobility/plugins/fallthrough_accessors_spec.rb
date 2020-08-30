@@ -4,7 +4,7 @@ require "mobility/plugins/fallthrough_accessors"
 describe Mobility::Plugins::FallthroughAccessors do
   include Helpers::Plugins
 
-  plugin_setup
+  plugin_setup :title
 
   context "option value is default" do
     plugins do

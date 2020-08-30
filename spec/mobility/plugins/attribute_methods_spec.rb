@@ -11,7 +11,7 @@ describe "Mobility::Plugins::AttributeMethods", orm: :active_record do
     reader
   end
 
-  plugin_setup
+  plugin_setup :title
 
   let(:untranslated_attributes) do
     {

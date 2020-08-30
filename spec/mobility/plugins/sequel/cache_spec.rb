@@ -8,7 +8,7 @@ describe "Mobility::Plugins::Sequel::Cache", orm: :sequel do
     cache
   end
 
-  plugin_setup
+  plugin_setup :title
 
   let(:model_class) do
     stub_const 'Article', Class.new(Sequel::Model)

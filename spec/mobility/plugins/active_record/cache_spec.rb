@@ -8,7 +8,7 @@ describe "Mobility::Plugins::ActiveRecord::Cache", orm: :active_record do
     cache
   end
 
-  plugin_setup
+  plugin_setup :title
 
   let(:model_class) do
     klass = Class.new(ActiveRecord::Base)

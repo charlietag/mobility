@@ -4,7 +4,7 @@ require "mobility/plugins/locale_accessors"
 describe Mobility::Plugins::LocaleAccessors do
   include Helpers::Plugins
 
-  plugin_setup
+  plugin_setup :title
 
   context "with option = [locales]" do
     plugins do
