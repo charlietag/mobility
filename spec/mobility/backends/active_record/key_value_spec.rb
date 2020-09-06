@@ -37,7 +37,7 @@ describe "Mobility::Backends::ActiveRecord::KeyValue", orm: :active_record do
 
     context "with cache" do
       plugins :active_record, :reader, :writer, :cache
-      before { translates Article, :title, :content, backend: :key_value, type: :text, cache: true }
+      before { translates Article, :title, :content, backend: :key_value, type: :text }
 
       include_accessor_examples "Article"
 

@@ -390,7 +390,7 @@ describe "Mobility::Backends::ActiveRecord::Table", orm: :active_record do
 
   describe "Model.i18n.find_by_<translated attribute>" do
     plugins :active_record, :writer, :query
-    before { translates Article, :title, backend: :table, cache: false }
+    before { translates Article, :title, backend: :table }
 
     it "finds correct translation if exists in current locale" do
       Mobility.locale = :ja
