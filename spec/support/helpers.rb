@@ -69,8 +69,66 @@ module Helpers
     end
   end
 
+  # Simple module for setting up translated attributes on a class
+  module Configure
+    def self.included(base)
+      base.extend ClassMethods
+    end
+
+    def translates(klass, *attribute_names, **options)
+      raise ArgumentError, "You have not declared plugins for this test" unless respond_to?(:translations_class)
+      klass.include translations_class.new(*attribute_names, **options)
+      klass
+    end
+
+    module ClassMethods
+      # Pass plugin names as arguments if no plugin defaults to set
+      def plugins(*args, &block)
+        if args.empty?
+          plugins_block = block
+        else
+          plugins_block = proc do
+            args.each { |arg| __send__ arg }
+          end
+        end
+        let(:translations_class) do
+          Class.new(Mobility::Attributes).tap do |attrs|
+            attrs.plugins(&plugins_block)
+          end
+        end
+      end
+
+      def translates(*attribute_names)
+        unless method_defined?(:translations)
+          let(:translations) do
+            translations_class.new(
+              *attribute_names,
+              **(respond_to?(:translation_options) ? translation_options : {})
+            )
+          end
+        end
+
+        unless method_defined?(:model_class)
+          let(:model_class) do
+            Class.new.tap do |klass|
+              klass.include translations
+            end
+          end
+        end
+
+        unless method_defined?(:instance)
+          let(:instance) { model_class.new }
+        end
+      end
+    end
+  end
+
   module ActiveRecord
     include Backend
+
+    def self.extended(base)
+      base.include Helpers::Configure
+    end
 
     def include_accessor_examples *args
       it_behaves_like "model with translated attribute accessors", *args
@@ -109,51 +167,6 @@ module Helpers
   module Generators
     def version_string
       "#{::ActiveRecord::VERSION::MAJOR}.#{::ActiveRecord::VERSION::MINOR}"
-    end
-  end
-
-  # Simple module for setting up translated attributes on a class
-  module Configure
-    def self.included(base)
-      base.extend ClassMethods
-    end
-
-    def translates(klass, *attribute_names, **options)
-      klass.include translations_class.new(*attribute_names, **options)
-      klass
-    end
-
-    module ClassMethods
-      def plugins(&block)
-        let(:translations_class) do
-          Class.new(Mobility::Attributes).tap do |attrs|
-            attrs.plugins(&block)
-          end
-        end
-      end
-
-      def translates(*attribute_names)
-        unless method_defined?(:translations)
-          let(:translations) do
-            translations_class.new(
-              *attribute_names,
-              **(respond_to?(:translation_options) ? translation_options : {})
-            )
-          end
-        end
-
-        unless method_defined?(:model_class)
-          let(:model_class) do
-            Class.new.tap do |klass|
-              klass.include translations
-            end
-          end
-        end
-
-        unless method_defined?(:instance)
-          let(:instance) { model_class.new }
-        end
-      end
     end
   end
 

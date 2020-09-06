@@ -73,15 +73,7 @@ describe "Mobility::Backends::ActiveRecord::Column", orm: :active_record do
 
     describe "with locale accessors" do
       include Helpers::Configure
-      plugins do
-        active_record
-        reader
-        writer
-        query
-        dirty
-        fallbacks
-        locale_accessors
-      end
+      plugins :active_record, :reader, :writer, :locale_accessors
 
       it "still works as usual" do
         translates Comment, *attributes, backend: :column, locale_accessors: true
