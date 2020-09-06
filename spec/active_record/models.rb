@@ -9,15 +9,3 @@ class FallbackPost < ActiveRecord::Base
   extend Mobility
   translates :title, :content, backend: :key_value, type: :text, cache: true, dirty: true, fallbacks: true
 end
-
-class MultitablePost < ActiveRecord::Base
-  extend Mobility
-  translates :title,
-    backend:          :table,
-    table_name:       :multitable_post_translations,
-    association_name: :translations
-  translates :foo,
-    backend:          :table,
-    table_name:       :multitable_post_foo_translations,
-    association_name: :foo_translations
-end
